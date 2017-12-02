@@ -1,0 +1,77 @@
+{php $bootstrap_type = 3;}
+{if empty($_W['isajax'])}
+{template 'header'}
+{template 'common'}
+<script language="javascript" src="../addons/ewei_shopping/images/touchslider.min.js"></script>
+<script language="javascript" src="../addons/ewei_shopping/images/swipe.js"></script>
+<style>
+   .td_a { height:7em; text-align: center}
+</style>
+<link type="text/css" rel="stylesheet" href="../addons/ewei_shopping/images/style.css?{TIMESTAMP}">
+<div class="head">
+	<a href="javascript:;" onclick="$('.head .order').toggleClass('hide');" class="bn pull-left"><i class="fa fa-reorder"></i></a>
+	<span class="title">商城首页</span>
+	<a href="{php echo $this->createMobileUrl('mycart')}" style="margin: 10px;" class="bn pull-right"><i class="fa fa-shopping-cart"></i><span class="buy-num img-circle" id="carttotal">{$carttotal}</span></a>
+
+</div>
+
+<script>
+	$(function() {
+		new Swipe($('#banner_box')[0], {
+			speed:500,
+			auto:3000,
+			callback: function(){
+				var lis = $(this.element).next("ol").children();
+				lis.removeClass("on").eq(this.index).addClass("on");
+			}
+		});
+	});
+</script>
+
+<div class="shopping-main">
+	<table style='width:100%;'>
+		<tr>
+			<td class='td_a'>
+				<a href="{php echo $this->createMobileUrl('list2')}">
+					<img src="../addons/ewei_shopping/template/mobile/images/icon_indexn_06.png" style='width:6.2em;height:6.2em'>
+				</a>
+			</td>
+			<td class='td_a'>
+				<a href="{php echo $this->createMobileUrl('list2',array('isnew'=>1))}">
+					<img src="../addons/ewei_shopping/template/mobile/images/icon_indexn_01.png" style='width:6.2em;height:6.2em'>
+				</a>
+			</td>
+			<td class='td_a'>
+				<a href="{php echo $this->createMobileUrl('list2',array('ishot'=>1))}">
+					<img src="../addons/ewei_shopping/template/mobile/images/icon_indexn_05.png" style='width:6.2em;height:6.2em'>
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td class='td_a'>
+				<a href="{php echo $this->createMobileUrl('list2',array('isdiscount'=>1))}">
+					<img src="../addons/ewei_shopping/template/mobile/images/icon_indexn_02.png" style='width:6.2em;height:6.2em'>
+				</a>
+			</td>
+			<td class='td_a'>
+				<a href="{php echo $this->createMobileUrl('list2',array('istime'=>1))}">
+					<img src="../addons/ewei_shopping/template/mobile/images/icon_indexn_09.png" style='width:6.2em;height:6.2em'>
+				</a>
+			</td>
+			<td class='td_a'>
+				<a href="{php echo $this->createMobileUrl('contactus')}">
+					<img src="../addons/ewei_shopping/template/mobile/images/icon_indexn_08.png" style='width:6.2em;height:6.2em'>
+				</a>
+			</td>
+		</tr>
+	</table>
+	{/if}
+<div class="list" id="list_rec" data-pindex="2">
+	<div class="list-tips" style='float:left;width:100%;font-size:14px;color:#e9342a;padding-left:10px;'>推荐商品</div>
+	{loop $rlist $item}
+		{template 'list_item'}
+	{/loop}
+</div>
+
+{template 'footer'}
+{template 'footerbar'}
